@@ -7,7 +7,6 @@ function TodayBoard({
   tasks,
   setTasks,
   startDnD,
-  onDrop,
   open,
   setOpen,
   selectedTask,
@@ -56,7 +55,6 @@ function TodayBoard({
         className="today-board"
         data-column="today"
         onDragOver={(e) => e.preventDefault()}
-        onDrop={onDrop}
       >
         <div className="text">
           <div className="info-today">
