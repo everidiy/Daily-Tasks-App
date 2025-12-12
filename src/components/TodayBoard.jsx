@@ -6,7 +6,8 @@ import { useState } from "react";
 function TodayBoard({
   tasks,
   setTasks,
-  startDnD,
+  setDragged,
+  onDrop,
   open,
   setOpen,
   selectedTask,
@@ -16,6 +17,8 @@ function TodayBoard({
 }) {
   const [taskText, setTaskText] = useState("");
   const [description, setDescription] = useState("");
+
+  const isMobile = window.innerWidth < 768;
 
   const [lastTap, setLastTap] = useState(0);
 
@@ -49,12 +52,22 @@ function TodayBoard({
     setLastTap(now);
   };
 
+  const moveTask = (id, newStatus) => {
+  setTasks(prev =>
+    prev.map(t =>
+      t.id === id ? { ...t, status: newStatus } : t
+    )
+  );
+  setOpenMore(false);
+};
+
+
   return (
     <>
       <div
         className="today-board"
-        data-column="today"
         onDragOver={(e) => e.preventDefault()}
+        onDrop={onDrop}
       >
         <div className="text">
           <div className="info-today">
@@ -73,11 +86,10 @@ function TodayBoard({
             <div
               key={task.id}
               className="task-item"
-              onMouseDown={(e) => startDnD(e, task)}
-              onTouchStart={(e) => startDnD(e, task)}
+              draggable
+              onDragStart={() => setDragged(task.id)}
               onClick={() => deleteTask(task.id)}
             >
-              
               <div className="text">
                 <p>{task.text}</p>
               </div>
@@ -115,7 +127,7 @@ function TodayBoard({
       )}
 
       {openMore && selectedTask && (
-        <Task onClose={() => setOpenMore(false)} onMove={(newStatus) => moveTask(selectedTask.id, newStatus)}>
+        <Task onClose={() => setOpenMore(false)}>
           <h2>Your task</h2>
 
           <div className="field">
@@ -129,6 +141,22 @@ function TodayBoard({
               {selectedTask.desc || "No description"}
             </div>
           </div>
+
+          {isMobile && (
+            <div className="btns">
+              <button onClick={() => moveTask(selectedTask.id, "today")}>
+                to Today
+              </button>
+
+              <button onClick={() => moveTask(selectedTask.id, "inprogress")}>
+                to Process
+              </button>
+
+              <button onClick={() => moveTask(selectedTask.id, "done")}>
+                to Done
+              </button>
+            </div>
+          )}
         </Task>
       )}
     </>
