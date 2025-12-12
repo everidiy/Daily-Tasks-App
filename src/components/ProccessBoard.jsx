@@ -1,4 +1,4 @@
-import "../styles/proccessBoard.css";
+import "../styles/proccessboard.css";
 
 function ProccessBoard({ tasks, setTasks, setDragged, onDrop, setSelectedTask, setOpenMore }) {
   const processTasks = tasks.filter(t => t.status === "inprogress");

@@ -1,4 +1,4 @@
-import "../styles/todayBoard.css";
+import "../styles/todayboard.css";
 import ModalWindow from "./ModalWindow";
 import Task from "./Task";
 import { useState } from "react";
