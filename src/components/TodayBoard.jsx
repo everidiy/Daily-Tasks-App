@@ -6,7 +6,7 @@ import { useState } from "react";
 function TodayBoard({
   tasks,
   setTasks,
-  setDragged,
+  startDnD,
   onDrop,
   open,
   setOpen,
@@ -54,6 +54,7 @@ function TodayBoard({
     <>
       <div
         className="today-board"
+        data-column="today"
         onDragOver={(e) => e.preventDefault()}
         onDrop={onDrop}
       >
@@ -74,10 +75,11 @@ function TodayBoard({
             <div
               key={task.id}
               className="task-item"
-              draggable
-              onDragStart={() => setDragged(task.id)}
+              onMouseDown={(e) => startDnD(e, task)}
+              onTouchStart={(e) => startDnD(e, task)}
               onClick={() => deleteTask(task.id)}
             >
+              
               <div className="text">
                 <p>{task.text}</p>
               </div>
@@ -115,7 +117,7 @@ function TodayBoard({
       )}
 
       {openMore && selectedTask && (
-        <Task onClose={() => setOpenMore(false)}>
+        <Task onClose={() => setOpenMore(false)} onMove={(newStatus) => moveTask(selectedTask.id, newStatus)}>
           <h2>Your task</h2>
 
           <div className="field">

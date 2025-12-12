@@ -5,6 +5,8 @@ import TodayBoard from './components/TodayBoard';
 import ProccessBoard from './components/ProccessBoard';
 import DoneBoard from './components/DoneBoard';
 
+import { useTouchDnD } from "./hooks/useTouchDnD";
+
 function App() {
   const [tasks, setTasks] = useState([]);
   const [dragged, setDragged] = useState(null);
@@ -12,6 +14,14 @@ function App() {
   const [open, setOpen] = useState(false);
   const [openMore, setOpenMore] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+
+  const { start } = useTouchDnD((task, newStatus) => {
+    setTasks(prev =>
+      prev.map(t =>
+        t.id === task.id ? { ...t, status: newStatus } : t
+      )
+    );
+  }); 
 
   const handleDrop = (status) => {
     if (!dragged) return;
@@ -32,6 +42,7 @@ function App() {
         setTasks={setTasks}
         setDragged={setDragged}
         onDrop={() => handleDrop("today")}
+        startDnD={start}
         open={open}
         setOpen={setOpen}
         selectedTask={selectedTask}
@@ -45,6 +56,7 @@ function App() {
         setTasks={setTasks}
         setDragged={setDragged}
         onDrop={() => handleDrop("inprogress")}
+        startDnD={start}
         setSelectedTask={setSelectedTask}
         setOpenMore={setOpenMore}
       />
@@ -54,6 +66,7 @@ function App() {
         setTasks={setTasks}
         setDragged={setDragged}
         onDrop={() => handleDrop("done")}
+        startDnD={start}
         setSelectedTask={setSelectedTask}
         setOpenMore={setOpenMore}
       />

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../styles/doneboard.css";
 
-function DoneBoard({ tasks, setTasks, setDragged, onDrop, setSelectedTask, setOpenMore }) {
+function DoneBoard({ tasks, setTasks, startDnD, onDrop, setSelectedTask, setOpenMore }) {
   const doneTasks = tasks.filter(t => t.status === "done");
 
   const [lastTap, setLastTap] = useState(0);
@@ -23,6 +23,7 @@ function DoneBoard({ tasks, setTasks, setDragged, onDrop, setSelectedTask, setOp
   return (
     <div
       className="done-board"
+      data-column="done"
       onDragOver={(e) => e.preventDefault()}
       onDrop={onDrop}
     >
@@ -40,8 +41,8 @@ function DoneBoard({ tasks, setTasks, setDragged, onDrop, setSelectedTask, setOp
           <div
             key={task.id}
             className="task-item"
-            draggable
-            onDragStart={() => setDragged(task.id)}
+            onMouseDown={(e) => startDnD(e, task)}
+            onTouchStart={(e) => startDnD(e, task)}
             onClick={() => deleteTask(task.id)}
           >
             <div className="text">

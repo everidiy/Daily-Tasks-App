@@ -1,6 +1,6 @@
 import "../styles/proccessboard.css";
 
-function ProccessBoard({ tasks, setTasks, setDragged, onDrop, setSelectedTask, setOpenMore }) {
+function ProccessBoard({ tasks, setTasks, startDnD, onDrop, setSelectedTask, setOpenMore }) {
   const processTasks = tasks.filter(t => t.status === "inprogress");
 
   const deleteTask = (id) => {
@@ -10,6 +10,7 @@ function ProccessBoard({ tasks, setTasks, setDragged, onDrop, setSelectedTask, s
   return (
     <div
       className="proccess-board"
+      data-column="inprogress"
       onDragOver={(e) => e.preventDefault()}
       onDrop={onDrop}
     >
@@ -25,8 +26,8 @@ function ProccessBoard({ tasks, setTasks, setDragged, onDrop, setSelectedTask, s
           <div
             key={task.id}
             className="task-item"
-            draggable
-            onDragStart={() => setDragged(task.id)}
+            onMouseDown={(e) => startDnD(e, task)}
+            onTouchStart={(e) => startDnD(e, task)}
             onClick={() => deleteTask(task.id)}
           >
             <div className="text">
