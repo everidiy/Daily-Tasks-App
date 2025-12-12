@@ -1,7 +1,17 @@
 import { useState } from "react";
 import "../styles/doneboard.css";
+import Task from "./Task";
 
-function DoneBoard({ tasks, setTasks, setDragged, onDrop, setSelectedTask, setOpenMore }) {
+function DoneBoard({
+  tasks,
+  setTasks,
+  setDragged,
+  onDrop,
+  openMore,
+  setOpenMore,
+  selectedTask,
+  setSelectedTask
+ }) {
   const doneTasks = tasks.filter(t => t.status === "done");
 
   const [lastTap, setLastTap] = useState(0);
@@ -20,6 +30,15 @@ function DoneBoard({ tasks, setTasks, setDragged, onDrop, setSelectedTask, setOp
     setTasks(prev => prev.filter(t => t.status !== "done"));
   };
 
+  const moveTask = (id, newStatus) => {
+  setTasks(prev =>
+    prev.map(t =>
+      t.id === id ? { ...t, status: newStatus } : t
+    )
+  );
+  setOpenMore(false);
+};
+
   return (
     <div
       className="done-board"
@@ -28,7 +47,7 @@ function DoneBoard({ tasks, setTasks, setDragged, onDrop, setSelectedTask, setOp
     >
       <div className="text">
         <div className="info-done">
-          <h2>In progress</h2>
+          <h2>Done</h2>
           <div className="green-circle"></div>
 
           <button className="done-btn" onClick={clearDone}>Clear</button>
@@ -52,6 +71,38 @@ function DoneBoard({ tasks, setTasks, setDragged, onDrop, setSelectedTask, setOp
           </div>
         ))}
       </div>
+
+      {openMore && selectedTask && (
+        <Task onClose={() => setOpenMore(false)}>
+          <h2>Your task</h2>
+
+          <div className="field">
+            <label>Text</label>
+            <div className="field-box">{selectedTask.text}</div>
+          </div>
+
+          <div className="field">
+            <label>Description</label>
+            <div className="field-box big">
+              {selectedTask.desc || "No description"}
+            </div>
+          </div>
+
+          <div className="btns">
+            <button onClick={() => moveTask(selectedTask.id, "today")}>
+              to Today
+            </button>
+
+            <button onClick={() => moveTask(selectedTask.id, "inprogress")}>
+              to Process
+            </button>
+
+            <button onClick={() => moveTask(selectedTask.id, "done")}>
+              to Done
+            </button>
+          </div>
+        </Task>
+      )}
     </div>
   );
 }
