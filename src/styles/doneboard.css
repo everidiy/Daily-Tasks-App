@@ -1,0 +1,117 @@
+.done-board {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px 25px;
+
+    background: #1f1f1f;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #fff;
+}
+
+.info-done {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    height: 50px;
+    width: 100%;
+}
+
+.done-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.done-btn {
+    border: none;
+    background: #2b2b2b;
+    padding: 10px;
+    border: 1px solid #3a3a3a;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-left: auto;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+
+    transition: 
+        transform 0.25s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.info-done .done-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    background-color: #353535;
+    border-color: #4a4a4a;
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.4),
+        0 0 12px rgba(60, 207, 78, 0.35); 
+}
+
+.green-circle {
+    width: 30px;
+    height: 30px;
+    background-color: #3CCF4E;
+    border-radius: 50%;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.text h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.text p {
+    margin: 5px 0 0;
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.dones {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    min-height: 150px;
+    background: #2b2b2b;
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid #3a3a3a;
+}
+
+.task-item button {
+    background: #262626;
+    border: 1px solid #3a3a3a;
+    color: #fff;
+    padding: 6px 10px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 
+        background 0.2s ease, 
+        transform 0.2s ease, 
+        border-color 0.2s ease;
+}
+
+.task-item button:hover {
+    background: #363636;
+    border-color: #4a4a4a;
+    transform: translateY(-2px);
+}
