@@ -4,6 +4,8 @@ import Task from "./Task";
 
 function DoneBoard({
   tasks,
+  deleteTask,
+  moveTask,
   setTasks,
   setDragged,
   onDrop,
@@ -14,30 +16,9 @@ function DoneBoard({
  }) {
   const doneTasks = tasks.filter(t => t.status === "done");
 
-  const [lastTap, setLastTap] = useState(0);
-
-  const deleteTask = (id) => {
-    const now = Date.now();
-
-    if (now - lastTap < 300) {
-      setTasks(prev => prev.filter(t => t.id !== id));
-    }
-    
-    setLastTap(now);
-  };
-
   const clearDone = () => {
     setTasks(prev => prev.filter(t => t.status !== "done"));
   };
-
-  const moveTask = (id, newStatus) => {
-  setTasks(prev =>
-    prev.map(t =>
-      t.id === id ? { ...t, status: newStatus } : t
-    )
-  );
-  setOpenMore(false);
-};
 
   return (
     <div

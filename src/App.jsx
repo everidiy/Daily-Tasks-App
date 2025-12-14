@@ -1,19 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./styles/App.css";
 
 import TodayBoard from './components/TodayBoard';
 import ProccessBoard from './components/ProccessBoard';
 import DoneBoard from './components/DoneBoard';
 
-import { useTouchDnD } from "./hooks/useTouchDnD";
+import { useTouchDnD } from "./customHooks/useTouchDnD";
+import { useLocalStorage } from "./customHooks/useLocalStorage";
+import { useTaskActions } from "./customHooks/useTasksActions";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useLocalStorage("tasks", []);
   const [dragged, setDragged] = useState(null);
 
   const [open, setOpen] = useState(false);
   const [openMore, setOpenMore] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+
+  const { deleteTask, moveTask } = useTaskActions(setTasks);
 
   const { start } = useTouchDnD((task, newStatus) => {
     setTasks(prev =>
@@ -39,6 +43,8 @@ function App() {
     <div className="board-wrapper">
       <TodayBoard 
         tasks={tasks}
+        deleteTask={deleteTask}
+        moveTask={moveTask}
         setTasks={setTasks}
         setDragged={setDragged}
         onDrop={() => handleDrop("today")}
@@ -53,6 +59,8 @@ function App() {
 
       <ProccessBoard
         tasks={tasks}
+        deleteTask={deleteTask}
+        moveTask={moveTask}
         setTasks={setTasks}
         setDragged={setDragged}
         onDrop={() => handleDrop("inprogress")}
@@ -63,6 +71,8 @@ function App() {
 
       <DoneBoard
         tasks={tasks}
+        deleteTask={deleteTask}
+        moveTask={moveTask}
         setTasks={setTasks}
         setDragged={setDragged}
         onDrop={() => handleDrop("done")}

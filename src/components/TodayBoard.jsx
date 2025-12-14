@@ -5,6 +5,8 @@ import { useState } from "react";
 
 function TodayBoard({
   tasks,
+  deleteTask,
+  moveTask,
   setTasks,
   setDragged,
   onDrop,
@@ -19,8 +21,6 @@ function TodayBoard({
   const [description, setDescription] = useState("");
 
   const isMobile = window.innerWidth < 768;
-
-  const [lastTap, setLastTap] = useState(0);
 
   const todayTasks = tasks.filter(t => t.status === "today");
 
@@ -41,25 +41,6 @@ function TodayBoard({
     setDescription("");
     setOpen(false);
   };
-
-  const deleteTask = (id) => {
-    const now = Date.now();
-
-    if (now - lastTap < 300) {
-      setTasks(prev => prev.filter(t => t.id !== id));
-    }
-    
-    setLastTap(now);
-  };
-
-  const moveTask = (id, newStatus) => {
-  setTasks(prev =>
-    prev.map(t =>
-      t.id === id ? { ...t, status: newStatus } : t
-    )
-  );
-  setOpenMore(false);
-};
 
 
   return (

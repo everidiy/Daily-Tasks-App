@@ -3,7 +3,8 @@ import Task from "./Task";
 
 function ProccessBoard({ 
   tasks,
-  setTasks,
+  deleteTask,
+  moveTask,
   setDragged,
   onDrop,
   openMore,
@@ -12,26 +13,6 @@ function ProccessBoard({
   setSelectedTask
 }) {
   const processTasks = tasks.filter(t => t.status === "inprogress");
-
-  const deleteTask = (id) => {
-    const now = Date.now();
-
-    if (now - lastTap < 300) {
-      setTasks(prev => prev.filter(t => t.id !== id));
-    }
-    
-    setLastTap(now);
-  };
-
-  const moveTask = (id, newStatus) => {
-    setTasks(prev =>
-      prev.map(t =>
-        t.id === id ? { ...t, status: newStatus } : t
-      )
-    );
-
-    setOpenMore(false);
-  };
 
   return (
     <>
