@@ -23,8 +23,8 @@ function ProccessBoard({
       >
         <div className="text">
           <div className="info-proccess">
-            <h2>In progress</h2>
             <div className="yellow-circle"></div>
+            <h2>In progress</h2>
           </div>
         </div>
 

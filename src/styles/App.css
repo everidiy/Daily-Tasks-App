@@ -13,6 +13,19 @@ body {
     flex-wrap: wrap;
 }
 
+.text-clues .title {
+    font-size: 13px;
+}
+
+.text-clues {
+    padding: 10px;
+    font-size: 10px;
+    text-align: center;
+    margin: 10px;
+    width: 250px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }

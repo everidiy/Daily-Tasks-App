@@ -28,8 +28,8 @@ function DoneBoard({
     >
       <div className="text">
         <div className="info-done">
-          <h2>Done</h2>
           <div className="green-circle"></div>
+          <h2>Done</h2>
 
           <button className="done-btn" onClick={clearDone}>Clear</button>
         </div>

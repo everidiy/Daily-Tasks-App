@@ -53,8 +53,8 @@ function TodayBoard({
         <div className="text">
           <div className="info-today">
             <div className="today">
-              <h2>Today tasks</h2>
               <div className="white-circle"></div>
+              <h2>Today tasks</h2>
             </div>
             <button className="today-btn" onClick={() => setOpen(true)}>
               Add

@@ -80,6 +80,16 @@ function App() {
         setSelectedTask={setSelectedTask}
         setOpenMore={setOpenMore}
       />
+
+
+      <div className="text-clues">
+        <div className="title">
+          <h1>Clues:</h1>
+        </div>
+        <h2>Double-tap a task to delete it</h2>
+        <h2>To move a task, tap on "..."</h2>
+        <h2>To delete all today’s tasks, tap "Clear" in Done</h2>
+      </div>
     </div>
   );
 }
