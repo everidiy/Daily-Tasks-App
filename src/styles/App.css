@@ -17,6 +17,13 @@ body {
     font-size: 13px;
 }
 
+.date {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
 .text-clues {
     padding: 10px;
     font-size: 10px;
